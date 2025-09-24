@@ -14,10 +14,6 @@ class Solution {
             {
                 end=mid;
             }
-            else
-            {
-                end=mid-1;
-            }
         }
         return st;
 
