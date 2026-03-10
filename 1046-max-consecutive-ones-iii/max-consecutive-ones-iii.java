@@ -1,18 +1,5 @@
 class Solution {
 
-    int findmax(int[] arr)
-    {
-        int max=-1;
-
-        for(int i=0; i<arr.length; i++)
-        {
-            max= Math.max(max, arr[i]);
-        }
-        return max;
-
-    }
-
-
     public int longestOnes(int[] nums, int k) {
 
        int n= nums.length;
