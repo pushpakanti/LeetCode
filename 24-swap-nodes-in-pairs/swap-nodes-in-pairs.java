@@ -9,28 +9,68 @@
  * }
  */
 class Solution {
-    public ListNode swapPairs(ListNode head) {
 
-        ListNode dummy= new ListNode(-1);
-        dummy.next=head;
-        ListNode prev= dummy;
+    ListNode reverse(ListNode head, int time)
+    {
+        ListNode curr= head;
+        ListNode prev= null;
 
-        ListNode first= head;
-        if(head==null) return head;
-        ListNode second= first.next;
-
-        while(first!=null && first.next!=null)
+        while(time>0 && curr!=null)
         {
-            prev.next= second;
-            first.next=second.next;
-            second.next=first;
-            prev=first;
-            first=first.next;
-            second = (first != null) ? first.next : null;
+            ListNode next= curr.next;
+            curr.next= prev;
+            prev= curr;
+            curr= next;
+            time--;
         }
 
-        return dummy.next;
-
-        
+        return prev;
     }
+
+
+    public ListNode swapPairs(ListNode head) {
+        if(head==null) return head;
+
+        ListNode left= head;
+        ListNode res= null;
+        ListNode prevLeft= null;
+        ListNode right;
+
+        while(true)
+        {
+            right=left;
+            int size=2;
+            int i;
+            for( i=0; i<=size-1; i++)
+            {
+                if (right==null) break;
+                right= right.next;
+            }
+            if( i<=size-1 && right==null)
+            {
+                if(prevLeft!= null) prevLeft.next= left;
+                break;
+            }
+
+                ListNode nextLeft= right;
+                ListNode newHead= reverse(left, size);
+
+                if(res==null)
+                {
+                    res=newHead;
+                }
+                if (prevLeft != null)
+                prevLeft.next = newHead;
+
+                left.next = nextLeft;
+
+                prevLeft = left;
+
+                left = nextLeft;
+
+                if (left == null) break;
+            }
+
+            return res != null ? res : head;
+        }
 }
