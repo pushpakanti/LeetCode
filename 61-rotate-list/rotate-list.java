@@ -10,39 +10,40 @@
  */
 class Solution {
     public ListNode rotateRight(ListNode head, int k) {
+
+        if(head==null || head.next==null) return head;
+
         ListNode temp= head;
-        ListNode temp1= head;
         int count=1;
-        if (head == null || head.next == null || k == 0) {
-            return head;}
-        else
-        {
+
         while(temp.next!=null)
         {
-            temp=temp.next;
             count++;
-        } 
+            temp= temp.next;
+        }
+        temp.next= head;
 
-        if(k%count==0) return head;
-        else
+        if(k==count)
         {
-            k= k%count;
+            temp.next=null;
+            return head;
         }
-
-        temp.next= temp1;
-
-        ListNode newTail = head;
-
-        for(int i=0; i<count-k-1;i++)
+        else if(k>count)       // if k is greater than totall nodes
         {
-            newTail = newTail.next;
+            k=k%count;
         }
 
-        ListNode newHead = newTail.next;
-        newTail.next = null;
 
-        return newHead;
+        int last= count-k;
+        ListNode temp2= head;
+        for(int i=0; i<last-1; i++)
+        {
+            temp2=temp2.next;
         }
+        ListNode newhead= temp2.next;
+        temp2.next=null;
+
+        return newhead;
 
     }
 }
