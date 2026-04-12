@@ -1,12 +1,26 @@
 class Solution {
     public boolean searchMatrix(int[][] matrix, int target) {
-        int n = matrix.length;
-        int m = matrix[0].length;
+        int n= matrix.length;   // total row
+        int m= matrix[0].length;    // total col
 
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j < m; j++) {
-                if (matrix[i][j] == target)
-                    return true;
+        int low= 0; int high= n*m-1;
+
+        while(low<=high)
+        {
+            int mid= low+ (high-low)/2;
+
+            int row= mid/m;     //row
+            int col= mid%m;     //columnss
+
+            if(matrix[row][col]==target) return true;
+
+            else if(matrix[row][col]<target)
+            {
+                low= mid+1;
+            }
+            else
+            {
+                high=mid-1;
             }
         }
 
