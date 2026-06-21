@@ -7,36 +7,45 @@
  *     TreeNode(int x) { val = x; }
  * }
  */
+
 class Solution {
 
     TreeNode ans= null;
-
     public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
-        fun(root, p,q);
-        return ans; 
+        if(p.val<q.val)
+        {
+            fun(root,p, q);
+        }
+        else
+        {
+            fun(root, q, p);
+        }
+
+        return ans;
     }
 
-    public int fun (TreeNode root, TreeNode p, TreeNode q)
+    public int fun(TreeNode root, TreeNode p, TreeNode q)
     {
         if(root==null) return 0;
 
-        int left= fun(root.left, p,q);
-        int right= fun(root.right, p,q);
-
-        int self= 0;
-
-        if(root==p || root==q)
+        if(root==p || root==q)   //base
         {
-            self=1;
+            ans=root;
+            return root.val;
         }
 
-        int total= left+self+right;        //total= 0/1/2;
-
-        if(total==2 && ans==null)           //ans==null bcz we are taking the first value for LCA
+        if(root.val<p.val)
         {
-            ans= root;
+            fun(root.right,p,q);
         }
-        return total;
-
+        else if(root.val>q.val)
+        {
+            fun(root.left,p,q);
+        }
+        else
+        {
+            ans=root;
+        }
+        return root.val;
     }
 }
