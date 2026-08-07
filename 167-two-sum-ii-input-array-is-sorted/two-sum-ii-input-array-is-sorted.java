@@ -1,31 +1,28 @@
 class Solution {
     public int[] twoSum(int[] numbers, int target) {
-        int result[] = new int[2];
-
-        int i=0;
+        int i=0; 
         int j= numbers.length-1;
+        int ans[]= new int[2];
 
-        while(j>i)
+        while(i<j)
         {
-            int check= numbers[i] + numbers[j];
-            
-            if(check== target) break;
+            int res= numbers[i]+numbers[j];
 
-            else if(check>target)
+            if(res==target) break;
+
+            if(res>target)
             {
                 j--;
             }
-            else if(check<target)
+            else
             {
                 i++;
             }
         }
 
-        result[0]=i+1;
-        result[1]= j+1;
+        ans[0]=i+1;
+        ans[1]= j+1;
 
-        return result;
-
-        
+        return ans;
     }
 }
